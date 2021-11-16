@@ -120,11 +120,17 @@ var startGame = function() {
 var endGame = function() { // Thanos snap!
     window.alert("The game has now ended. Let's see how you did!");
 
-    // If you live, you win
-    if (playerInfo.health > 0) {
-        window.alert("Great job, you've survived the game! You have a score of " + playerInfo.money + ".");
+    // High scores
+    var highScore = localStorage.getItem("highscore");
+    if (highScore === null) {
+        highScore = 0;
+    }
+    if (playerInfo.money > highScore){
+        localStorage.setItem("highscore", playerInfo.money);
+        localStorage.setItem("name", playerInfo.name);
+        alert(playerInfo.name + " now has the high score of " + playerInfo.money + "!");
     } else {
-        window.alert("You have lost your robot in battle.");
+        alert(playerInfo.name + " did not beat the high score of " + highScore + ". Maybe next time.");
     }
 
     // Would you like to play again?
