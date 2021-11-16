@@ -85,6 +85,8 @@ var startGame = function() {
 };
 
 var endGame = function() { // Thanos snap!
+    window.alert("The game has now ended. Let's see how you did!");
+
     // If you live, you win
     if (playerInfo.health > 0) {
         window.alert("Great job, you've survived the game! You have a score of " + playerInfo.money + ".");
@@ -127,6 +129,7 @@ var shop = function() {
     }
 };
 
+// Player Information
 var playerInfo = {
     name: window.prompt("What is your robot's name?"),
     health: 100,
@@ -145,11 +148,10 @@ var playerInfo = {
         } else {
             window.alert("You do not have enough money!");
         }
-        
     },
     upgradeAttack: function() {
         if (this.money >= 7) {
-            window.alert("Refilling player's attack by 6 for 7 dollars.");
+            window.alert("Upgrading player's attack by 6 for 7 dollars.");
             this.attack += 6;
             this.money -=7;
         } else {
@@ -158,6 +160,7 @@ var playerInfo = {
     }
 };
 
+// Enemy Information
 var enemyInfo = [
     {
         name: "Roberto",
