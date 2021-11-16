@@ -130,20 +130,20 @@ var endGame = function() { // Thanos snap!
 };
 
 var shop = function() {
-    var shopOptionPrompt = window.prompt("Would you like to REFILL your health, UPGRADE your attack, or LEAVE the store? Please enter one: 'REFILL', 'UPGRADE', or 'LEAVE' to make a choice.");
-    // Ignore capitalization from input
-    if (shopOptionPrompt != null) shopOptionPrompt = shopOptionPrompt.toLowerCase();
+    var shopOptionPrompt = window.prompt("Would you like to REFILL your health, UPGRADE your attack, or LEAVE the store? Please enter one: 1 for REFILL, 2 for UPGRADE, or 3 for LEAVE.");
+    // Make string into int
+    shopOptionPrompt = parseInt(shopOptionPrompt);
 
     switch (shopOptionPrompt) {
-        case "refill":
+        case 1:
             playerInfo.refillHealth();
             break;
 
-        case "upgrade":
+        case 2:
             playerInfo.upgradeAttack();
             break;
 
-        case "leave":
+        case 3:
             window.alert("Leaving the store.");
             break;
         
