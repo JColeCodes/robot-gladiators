@@ -3,28 +3,41 @@ var randomNumber = function(min, max) {
     return value;
 };
 
+var fightOrSkip = function() {
+    // Do you want to fight?
+    var promptFight = window.prompt("Would you like to FIGHT or SKIP this battle? Enter 'FIGHT' or 'SKIP' to choose.");
+
+    if (!promptFight) {
+        window.alert("You need to provide a valid answer! Please try again.");
+        return fightOrSkip();
+    }
+
+    // Ignore capitalization from input
+    promptFight = promptFight.toLowerCase();
+
+    // If player picks to fight
+    if (promptFight === "skip") {
+        // Confirm if player wants to skip
+        var confirmSkip = window.confirm("Are you sure you want to quit?");
+
+        // If yes, leave fight.
+        if (confirmSkip) {
+            window.alert(playerInfo.name + " has chosen to skip the fight. Goodbye!");
+            // Subtract money from playerInfo.money
+            playerInfo.money = Math.max(0, playerInfo.money - 10);
+            return true;
+        }
+    }
+
+    return false;
+}
+
 var fight = function(enemy) {
     // Repeat and execute as long as enemy robot is alive
     while (playerInfo.health > 0 && enemy.health > 0) {
 
-        // Do you want to fight?
-        var promptFight = window.prompt("Would you like to FIGHT or SKIP this battle? Enter 'FIGHT' or 'SKIP' to choose.");
-        // Ignore capitalization from input
-        if (promptFight != null) promptFight = promptFight.toUpperCase();
-
-        // If player picks to fight
-        if (promptFight === "SKIP") {
-            // Confirm if player wants to skip
-            var confirmSkip = window.confirm("Are you sure you want to quit?");
-
-            // If yes, leave fight. If no, ask by running fight again
-            if (confirmSkip) {
-                window.alert(playerInfo.name + " has chosen to skip the fight. Goodbye!");
-                // Subtract money from playerInfo.money
-                playerInfo.money = Math.max(0, playerInfo.money - 10);
-                console.log("playerInfo.money", playerInfo.money);
-                break;
-            }
+        if(fightOrSkip()) {
+            break;
         }
         
         // Subtract playerInfo.attack from enemy Health
@@ -57,6 +70,7 @@ var fight = function(enemy) {
 };
 
 var getPlayerName = function() {
+    // No blank names!
     var name = "";
 
     while (name === "" || name === null) {
@@ -118,18 +132,18 @@ var endGame = function() { // Thanos snap!
 var shop = function() {
     var shopOptionPrompt = window.prompt("Would you like to REFILL your health, UPGRADE your attack, or LEAVE the store? Please enter one: 'REFILL', 'UPGRADE', or 'LEAVE' to make a choice.");
     // Ignore capitalization from input
-    if (shopOptionPrompt != null) shopOptionPrompt = shopOptionPrompt.toUpperCase();
+    if (shopOptionPrompt != null) shopOptionPrompt = shopOptionPrompt.toLowerCase();
 
     switch (shopOptionPrompt) {
-        case "REFILL":
+        case "refill":
             playerInfo.refillHealth();
             break;
 
-        case "UPGRADE":
+        case "upgrade":
             playerInfo.upgradeAttack();
             break;
 
-        case "LEAVE":
+        case "leave":
             window.alert("Leaving the store.");
             break;
         
